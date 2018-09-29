@@ -1,0 +1,13 @@
+name: citibike-cli
+version: 0.1.0
+
+authors:
+  - Andrew Freeman <afreeman@simplereach.com>
+
+dependencies:
+  citibike:
+    github: woodruffw/citibike.cr
+
+crystal: 0.26.1
+
+license: MIT
