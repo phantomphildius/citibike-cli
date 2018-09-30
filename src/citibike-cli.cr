@@ -1,32 +1,31 @@
-# TODO: Write documentation for `Citibike::Cli`
+# A simple cli over the [NYC Citibike shard](https://github.com/woodruffw/citibike.cr/blob/master/src/citibike.cr)
+# Run the executable and provide an address from the [GBFS](https://gbfs.citibikenyc.com/gbfs/en/station_information.json)
+
 require "citibike"
-require "option_parser"
 
 module Citibike::Cli
   VERSION = "0.1.0"
 
-  destination = ""
+  puts "What is station do you want to check?"
 
-  OptionParser.parse! do |parser|
-    parser.banner = "Usage: citibike-cli [arguments]"
-    parser.on("-f ZIPCODE", "--find ZIPCODE", "Finds stations near your zipcode") { |zip| location = zip }
-    parser.on("-b NAME", "--bikes=NAME", "Returns the bike count for the station") { |name| destination = name }
-    parser.on("-d NAME", "--docks=NAME", "Returns the dock count for the station") { |name| destination = name }
-    parser.on("-h", "--help", "Show this help") { puts parser }
-  end
+  location = gets
 
-  info = CitiBike.station_information
-  station = info.find { |station| station.name == destination }
+  if !location.nil?
+    station = CitiBike.station_information.find { |station| station.name == location }
 
-  if !station.nil?
-    status = CitiBike.station_status
-    bike = status.select { |info| info.station_id == station.station_id }.first
+    if !station.nil?
+      status = CitiBike.station_status
+      bike = status.select { |info| info.station_id == station.station_id }.first
 
-    puts "there are #{bike.num_bikes_available} bikes available"
-    puts "there are #{bike.num_ebikes_available} e bikes available"
-    puts "there are #{bike.num_bikes_disabled} disabled bikes"
-    puts "there are #{bike.num_docks_available} docks available"
+      puts "there are #{bike.num_bikes_available} bikes available"
+      puts "there are #{bike.num_ebikes_available} e bikes available"
+      puts "there are #{bike.num_bikes_disabled} disabled bikes"
+      puts "there are #{bike.num_docks_available} docks available"
+    else
+      puts "not a valid station name"
+    end
+
   else
-    puts "station #{destination} doesn't exist"
+    puts "must provide a station name"
   end
 end

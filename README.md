@@ -1,28 +1,23 @@
 # citibike-cli
 
-TODO: Write a description here
+A simple cli that takes an address and returns bike & dock availability stats.
+Uses [citibike.cr](https://github.com/woodruffw/citibike.cr/blob/master/src/citibike.cr) to access [GBFS](https://gbfs.citibikenyc.com/gbfs/en/station_information.json) to provide data.
 
 ## Installation
 
-Add this to your application's `shard.yml`:
-
-```yaml
-dependencies:
-  citibike-cli:
-    github: your-github-user/citibike-cli
+```bash
+git clone https://github.com/phantomphildius/citibike-cli
+crsytal build src/citibike-cli.cr --release
 ```
 
 ## Usage
 
-```crystal
-require "citibike-cli"
+```bash
+./citibike-cli
+
+What is station do you want to check?
+1 Ave & E 78 St
 ```
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
 
 ## Contributing
 
@@ -34,4 +29,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [your-github-user](https://github.com/your-github-user) Andrew Freeman - creator, maintainer
+- [phantomphildius](https://github.com/phantomphildius) Andrew Freeman - creator, maintainer
